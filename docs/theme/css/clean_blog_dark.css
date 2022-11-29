@@ -1,5 +1,5 @@
 .dark body{
-	background-color:  #121212;
+	background-color:  #1e293b;
 	color: #ffffff;
 }
 
@@ -17,3 +17,13 @@
 nav a{
 	cursor: pointer;
 }
+
+.dark footer p{
+	color: #f8fafc;
+}
+
+.dark .post-meta{
+	color:#c1cbd5;
+}
+
+

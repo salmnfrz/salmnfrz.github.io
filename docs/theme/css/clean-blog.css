@@ -7,8 +7,9 @@
 body {
   font-family: sans-serif;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 530;
   background-color: #f8fafc;
+  color: #092133;
 }
 
 p {
@@ -71,6 +72,7 @@ hr.small {
   border-radius: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  margin-right: 1rem;
   list-style-type: none;
 }
 
@@ -92,11 +94,10 @@ hr.small {
 }
 @media only screen and (min-width: 768px) {
   .navbar-custom {
-    background: transparent;
     border-bottom: 1px solid transparent;
   }
   .dark .navbar-custom .navbar-brand {
-    color: white;
+    color: #4f4f50;
     padding: 20px;
   }
   .dark .navbar-custom .navbar-brand:hover,
@@ -106,7 +107,7 @@ hr.small {
 
 
   .dark .navbar-custom .nav li a {
-    color: white;
+    color: #4f4f50;
   }
 
   .navbar-custom .nav li a{
@@ -228,7 +229,6 @@ hr.small {
 }
 .post-heading .meta {
   font-weight: 300;
-  font-size: 20px;
   padding-bottom: 15px;
 }
 .intro-header .post-heading .meta a {
@@ -417,7 +417,7 @@ form .row:first-child .floating-label-form-group {
 img {
   max-width: 100%;
   height: auto;
-  width: auto\9; /* ie8 */
+  border-radius: 1.5rem;
 }
 img::selection {
   color: white;

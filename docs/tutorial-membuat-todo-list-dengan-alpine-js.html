@@ -1,472 +1,141 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{dark: localStorage.getItem('dark') == 'true'?true:false}" :class="dark?'dark':'light'">
-
-<head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.0.0/turbolinks.js" integrity="sha512-P3/SDm/poyPMRBbZ4chns8St8nky2t8aeG09fRjunEaKMNEDKjK3BuAstmLKqM7f6L1j0JBYcIRL4h2G6K6Lew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-            <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="My personal blogging website">
-        <meta name="turbolinks-cache-control" content="no-cache">
-
-            <meta name="google-site-verification" content="yf_iZ9OPl9MH07cqCuRwS7TX4FTu1xYrdf5WuzPLpK8">
-
-        <title>Tutorial membuat Todo list dengan alpine js</title>
-
-        <!-- Bootstrap Core CSS -->
-        <link href="https://salmnfrz.github.io/theme/css/bootstrap.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="https://salmnfrz.github.io/theme/css/clean-blog.css" rel="stylesheet">
-
-        <link href="https://salmnfrz.github.io/theme/css/clean_blog_dark.css" rel="stylesheet">
-
-        <!-- Code highlight color scheme -->
-            <link href="https://salmnfrz.github.io/theme/css/code_blocks/monokai.css" rel="stylesheet">
-
-
-        <!-- Custom Fonts -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
+<html :class="dark?'dark':'light'" lang="en" x-data="{dark: localStorage.getItem('dark') == 'true'?true:false}"><head><script crossorigin="anonymous" integrity="sha512-P3/SDm/poyPMRBbZ4chns8St8nky2t8aeG09fRjunEaKMNEDKjK3BuAstmLKqM7f6L1j0JBYcIRL4h2G6K6Lew==" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.0.0/turbolinks.js"></script><meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="My personal blogging website" name="description"/><meta content="no-cache" name="turbolinks-cache-control"/><meta content="yf_iZ9OPl9MH07cqCuRwS7TX4FTu1xYrdf5WuzPLpK8" name="google-site-verification"/><title>Tutorial membuat Todo list dengan alpine js</title><link href="https://salmnfrz.github.io/theme/css/bootstrap.css" rel="stylesheet"/><link href="https://salmnfrz.github.io/theme/css/clean-blog.css" rel="stylesheet"/><link href="https://salmnfrz.github.io/theme/css/clean_blog_dark.css" rel="stylesheet"/><link href="https://salmnfrz.github.io/theme/css/code_blocks/monokai.css" rel="stylesheet"/><link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" referrerpolicy="no-referrer" rel="stylesheet"/><!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-
-    <meta name="keywords" content="framework,website,frontend,javascript,alpinejs,blogging" >
-        <meta name="description" content="Setelah berkenalan dengan apa itu Alpine js disini,kali ini penulis akan memberikan tutorial membuat project menggunakan Alpine js,...">
-
-        <meta name="author" content="Alfarizi">
-
-        <meta name="tags" content="Alpine js">
-        <meta name="tags" content="Javascript">
-
-	                <meta property="og:locale" content="">
-		<meta property="og:site_name" content="salmnfrz">
-
-	<meta property="og:type" content="article">
-            <meta property="article:author" content="https://salmnfrz.github.io/author/alfarizi.html">
-	<meta property="og:url" content="https://salmnfrz.github.io/tutorial-membuat-todo-list-dengan-alpine-js.html">
-	<meta property="og:title" content="Tutorial membuat Todo list dengan alpine js">
-	<meta property="article:published_time" content="2022-12-05 00:00:00+07:00">
-            <meta property="og:description" content="Setelah berkenalan dengan apa itu Alpine js disini,kali ini penulis akan memberikan tutorial membuat project menggunakan Alpine js,...">
-
-            <meta property="og:image" content="https://salmnfrz.github.io//images/post_cover/alpine_cover1.png">
-</head>
-
-<body class="article-tutorial-membuat-todo-list-dengan-alpine-js">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default is-fixed is-visible navbar-custom navbar-sticky">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="https://salmnfrz.github.io/">salmnfrz</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right" x-data>
-                    <li style="padding-top: 0px">
-                        <a x-on:click="dark = !dark;localStorage.setItem('dark',dark)">
-                            <i :class="dark?'fas fa-moon':'fas fa-sun'"  style="font-size: 16pt;"></i>
-                        </a>
-                    </li>                    
-                        <li x-init="console.log(document.title)">
-                            <a href="/tags.html">Tag</a>
-                        </li>
-                        <li x-init="console.log(document.title)">
-                            <a href="/categories.html">Kategori</a>
-                        </li>
-
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Header -->
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading pb-3">
-                    <h1>Tutorial membuat Todo list dengan alpine js</h1>                        <a  class="category" href="https://salmnfrz.github.io/tag/alpine-js.html" style="margin-right: 1.5rem">#Alpine js</a>
-                        <a  class="category" href="https://salmnfrz.github.io/tag/django.html" style="margin-right: 1.5rem">#Django</a>
-                        <a  class="category" href="https://salmnfrz.github.io/tag/javascript.html" style="margin-right: 1.5rem">#Javascript</a>
-                    <span class="meta" style="margin-top: 2rem;">
-                        <img src="https://www.gravatar.com/avatar/ba235872f97ec055ffeb763abaf35007" alt="author image" style="width: 5rem;height: 5rem;">
-                            <a href="https://salmnfrz.github.io/author/alfarizi.html">Alfarizi</a>
-                        · 05 Dec 2022 
-                    </span>
-                
-                        <img src="https://salmnfrz.github.io/images/post_cover/alpine_cover1.png" style="height: 350px;width: 100%;border-radius: 1.5rem;" />
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <!-- Post Content -->
-    <article style="line-height: 2.8rem;">
-        <p>Setelah berkenalan dengan apa itu Alpine js <a href="/alpine-js-framework-untuk-backend-developer.html">disini</a>,kali ini penulis akan memberikan tutorial membuat project menggunakan Alpine js, yaitu membuat aplikasi todo list sederhana.</p>
-<p>Sebelum mengikuti tutorial yaitu: </p>
-<ol>
-<li>Browser(jangan yang terlalu jadul, alpine js bisa tidak bekerja)</li>
-<li>Text editor(vscode,sublime,notepadd++ dll)</li>
-<li>Jaringan internet untuk mendownload alpine js, tapi jika menyimpan alpine js secara offline, maka tidak diperlukan internet</li>
-</ol>
-<p>Untuk fitur fitur yang ada pada todo list yang akan dibuat adalah sebagai berikut: </p>
-<ol>
-<li>Menambahkan item  </li>
-<li>Menghapus item  </li>
-<li>Menandai item yang telah selesai</li>
-</ol>
-<p>Terlihat sulit? tapi karena kita menggunakan alpine js kita dapat membuatnya dengan mudah. Sekarang mari lanjut ke cara pembuatannya.</p>
-<h1>Membuat struktur dasar file html</h1>
-<p>Pastinya sebelum membuat webisite kita harus membuat html beserta struktur dasarnya. Berikut adalah strukturnya:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+        <![endif]--><meta content="framework,website,frontend,javascript,alpinejs,blogging" name="keywords"/><meta content="Setelah berkenalan dengan apa itu Alpine js disini,kali ini penulis akan memberikan tutorial membuat project menggunakan Alpine js,..." name="description"/><meta content="Alfarizi" name="author"/><meta content="Alpine js" name="tags"/><meta content="Javascript" name="tags"/><meta content="" property="og:locale"/><meta content="salmnfrz" property="og:site_name"/><meta content="article" property="og:type"/><meta content="https://salmnfrz.github.io/author/alfarizi.html" property="article:author"/><meta content="https://salmnfrz.github.io/tutorial-membuat-todo-list-dengan-alpine-js.html" property="og:url"/><meta content="Tutorial membuat Todo list dengan alpine js" property="og:title"/><meta content="2022-12-05 00:00:00+07:00" property="article:published_time"/><meta content="Setelah berkenalan dengan apa itu Alpine js disini,kali ini penulis akan memberikan tutorial membuat project menggunakan Alpine js,..." property="og:description"/><meta content="https://salmnfrz.github.io//images/post_cover/alpine_cover1.png" property="og:image"/></head><body class="article-tutorial-membuat-todo-list-dengan-alpine-js"><nav class="navbar navbar-default is-fixed is-visible navbar-custom navbar-sticky"><div class="container-fluid"><div class="navbar-header page-scroll"><button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="https://salmnfrz.github.io/">salmnfrz</a></div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav navbar-right" x-data=""><li style="padding-top: 0px"><a x-on:click="dark = !dark;localStorage.setItem('dark',dark)"><i :class="dark?'fas fa-moon':'fas fa-sun'" style="font-size: 16pt;"></i></a></li><li x-init="console.log(document.title)"><a href="/tags.html">Tag</a></li><li x-init="console.log(document.title)"><a href="/categories.html">Kategori</a></li></ul></div></div></nav><br/><br/><br/><br/><br/><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class="post-heading pb-3"><h1>Tutorial membuat Todo list dengan alpine js</h1> <a class="category" href="https://salmnfrz.github.io/tag/alpine-js.html" style="margin-right: 1.5rem">#Alpine js</a><a class="category" href="https://salmnfrz.github.io/tag/django.html" style="margin-right: 1.5rem">#Django</a><a class="category" href="https://salmnfrz.github.io/tag/javascript.html" style="margin-right: 1.5rem">#Javascript</a><span class="meta" style="margin-top: 2rem;"><img alt="author image" src="https://www.gravatar.com/avatar/ba235872f97ec055ffeb763abaf35007" style="width: 5rem;height: 5rem;"/><a href="https://salmnfrz.github.io/author/alfarizi.html">Alfarizi</a> · 05 Dec 2022 </span><img src="https://salmnfrz.github.io/images/post_cover/alpine_cover1.png" style="height: 350px;width: 100%;border-radius: 1.5rem;"/></div></div></div></div><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><article style="line-height: 2.8rem;"><p>Setelah berkenalan dengan apa itu Alpine js <a href="/alpine-js-framework-untuk-backend-developer.html">disini</a>,kali ini penulis akan memberikan tutorial membuat project menggunakan Alpine js, yaitu membuat aplikasi todo list sederhana.</p><p>Sebelum mengikuti tutorial yaitu: </p><ol><li>Browser(jangan yang terlalu jadul, alpine js bisa tidak bekerja)</li><li>Text editor(vscode,sublime,notepadd++ dll)</li><li>Jaringan internet untuk mendownload alpine js, tapi jika menyimpan alpine js secara offline, maka tidak diperlukan internet</li></ol><p>Untuk fitur fitur yang ada pada todo list yang akan dibuat adalah sebagai berikut: </p><ol><li>Menambahkan item </li><li>Menghapus item </li><li>Menandai item yang telah selesai</li></ol><p>Terlihat sulit? tapi karena kita menggunakan alpine js kita dapat membuatnya dengan mudah. Sekarang mari lanjut ke cara pembuatannya.</p><h1>Membuat struktur dasar file html</h1><p>Pastinya sebelum membuat webisite kita harus membuat html beserta struktur dasarnya. Berikut adalah strukturnya:</p><div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"en"</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"UTF-8"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 
     <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Jika di text editor kalian terinstall plugin emmet, struktur html di munculkan dengan mengetikan <code>!</code> lalu tekan <kbd>Tab</kbd>.</p>
-<p>Jika sudah, simpan file htmlnya dengan nama apapun yang berakhiran <code>.html</code></p>
-<h1>Menginstall alpine js</h1>
-<p>Untuk instalasi alpine js ada 2 cara yaitu menggunakan link cdn dan mendownloadnya untuk menggunkannya secara offline.</p>
-<ul>
-<li><strong>Installasi menggunakan link dari cdn</strong></li>
-</ul>
-<p>Masukan tag berikut ke dalam bagian <code>head</code> dari html: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/alpinejs&quot;</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<ul>
-<li><strong>Menggunakan secara offline</strong></li>
-</ul>
-<p>Pergi ke link <a href="https://unpkg.com/alpinejs">ini</a>, kemudian copy semua kontennya lalu paste-kan ke dalam file javascript, simpan dengan nama: <code>alpine.js</code>. Untuk tempat menyimpannya penulis sarankan di folder yang sama dengan file html tadi agar lebih mudah ditemukan.</p>
-<p>Struktur folder jika menyimpan alpine js secara offline: 
-<img alt="struktur folder" src="https://salmnfrz.github.io/images/tutorial/todoList/8.png"></p>
-<p>Setelah itu masukan tag berikut ke dalam bagian <code>head</code> dari html: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;alpine.js&quot;</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Untuk mengecek kita bisa membuat program sederhana dengan alpine js, yaitu sebagai berikut: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="p">&gt;</span>        
-    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;&#39;hello world&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div><p>Jika di text editor kalian terinstall plugin emmet, struktur html di munculkan dengan mengetikan <code>!</code> lalu tekan <kbd>Tab</kbd>.</p><p>Jika sudah, simpan file htmlnya dengan nama apapun yang berakhiran <code>.html</code></p><h1>Menginstall alpine js</h1><p>Untuk instalasi alpine js ada 2 cara yaitu menggunakan link cdn dan mendownloadnya untuk menggunkannya secara offline.</p><ul><li><strong>Installasi menggunakan link dari cdn</strong></li></ul><p>Masukan tag berikut ke dalam bagian <code>head</code> dari html: </p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://unpkg.com/alpinejs"</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><ul><li><strong>Menggunakan secara offline</strong></li></ul><p>Pergi ke link <a href="https://unpkg.com/alpinejs">ini</a>, kemudian copy semua kontennya lalu paste-kan ke dalam file javascript, simpan dengan nama: <code>alpine.js</code>. Untuk tempat menyimpannya penulis sarankan di folder yang sama dengan file html tadi agar lebih mudah ditemukan.</p><p>Struktur folder jika menyimpan alpine js secara offline: <img alt="struktur folder" src="https://salmnfrz.github.io/images/tutorial/todoList/8.png"/></p><p>Setelah itu masukan tag berikut ke dalam bagian <code>head</code> dari html: </p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"alpine.js"</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div><p>Untuk mengecek kita bisa membuat program sederhana dengan alpine js, yaitu sebagai berikut: </p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="p">&gt;</span>        
+    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"'hello world'"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Masukan tag tersebut ke dalam body dari html, lalu lihat apakah ada tulisan 'hello world' yang muncul? Perlu diingat jika alpine js akan menganggap setiap nilai di dalam atribut khususnya sebagai kode javascript, maka jika tidak ada teks yang tampil, mungkin kutip satunya lupa ditambahkan.</p>
-<p>Sederhananya seperti ini:   </p>
-<p>❌ Tidak akan muncul apa apa karena nilai atribut adalah kode javascript yang salah(tidak ada kutip satu).</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;hello world&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>✅ Teks akan muncul, karena penulisan string pada javascript benar(ada kutip satu).</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;&#39;hello world&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Dan perlu diperhatikan juga jika setiap nilai string pada javascript di alpine js, tidak boleh menggunakan kutip dua(<code>""</code>) ,sebagai gantinya gunakan kutip satu(<code>''</code>) atau simbol backtick(``).</p>
-<h2>Membuat komponen dasar todo list</h2>
-<p>Jika semua sudah terinstall, kosongkan bagian body dari html lalu buat komponen alpine js.</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span> <span class="p">&gt;</span>
+</code></pre></div><p>Masukan tag tersebut ke dalam body dari html, lalu lihat apakah ada tulisan 'hello world' yang muncul? Perlu diingat jika alpine js akan menganggap setiap nilai di dalam atribut khususnya sebagai kode javascript, maka jika tidak ada teks yang tampil, mungkin kutip satunya lupa ditambahkan.</p><p>Sederhananya seperti ini: </p><p>❌ Tidak akan muncul apa apa karena nilai atribut adalah kode javascript yang salah(tidak ada kutip satu).</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"hello world"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div><p>✅ Teks akan muncul, karena penulisan string pada javascript benar(ada kutip satu).</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"'hello world'"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div><p>Dan perlu diperhatikan juga jika setiap nilai string pada javascript di alpine js, tidak boleh menggunakan kutip dua(<code>""</code>) ,sebagai gantinya gunakan kutip satu(<code>''</code>) atau simbol backtick(``).</p><h2>Membuat komponen dasar todo list</h2><p>Jika semua sudah terinstall, kosongkan bagian body dari html lalu buat komponen alpine js.</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span> <span class="p">&gt;</span>
 
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Nah di dalam komponen tersebut ada dua variabel, yaitu <code>todos</code> dan <code>todoName</code>. Variabel <code>todos</code> ini akan digunakan untuk menyimpan kumpulan item yang bertipe array sedangkan <code>todoName</code> akan menyimpan nilai string dari data yang di input sebelum dimasukan ke array.</p>
-<p>dan jika digabung dengan html tadi maka akan menjadi:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+</code></pre></div><p>Nah di dalam komponen tersebut ada dua variabel, yaitu <code>todos</code> dan <code>todoName</code>. Variabel <code>todos</code> ini akan digunakan untuk menyimpan kumpulan item yang bertipe array sedangkan <code>todoName</code> akan menyimpan nilai string dari data yang di input sebelum dimasukan ke array.</p><p>dan jika digabung dengan html tadi maka akan menjadi:</p><div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"en"</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;alpine.js&quot;</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"UTF-8"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"alpine.js"</span> <span class="na">defer</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Document<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
 
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Saat ini file html masih kosong dan belum ada yang tampil.</p>
-<h2>Membuat input dan memasukan item</h2>
-<p>Nah jika sudah membuat komponen dan data awalan, buatlah elemen input di dalam komponen dengan atribut <code>x-model</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>                       
-</code></pre></div>
-
-<p>Nah <code>x-model</code> ini akan mengikat variabel <code>todoName</code> pada elemen input, jadi setiap kita melakukan perubahan pada input nilai variabel <code>todoName</code> juga akan ikut berubah.</p>
-<p>Jika ingin mengecek jika nilai variabel berubah, kita bisa coba lihat dengan menambahkan elemen lain untuk testing di bawah input tadi.</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Nilai input: <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Refresh browser kalian lalu coba masukan dan ubah nilai di input. Apakah seperti ini?</p>
-<p><img alt="alpine1" src="https://salmnfrz.github.io/images/tutorial/todoList/alpine1.gif"></p>
-<p>Jika sudah benar, hapus lagi elemen <code>p</code> yang tadi untuk testing, ganti dengan button, maka komponen nya akan tampak seperti ini: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>           
+</code></pre></div><p>Saat ini file html masih kosong dan belum ada yang tampil.</p><h2>Membuat input dan memasukan item</h2><p>Nah jika sudah membuat komponen dan data awalan, buatlah elemen input di dalam komponen dengan atribut <code>x-model</code>.</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>                       
+</code></pre></div><p>Nah <code>x-model</code> ini akan mengikat variabel <code>todoName</code> pada elemen input, jadi setiap kita melakukan perubahan pada input nilai variabel <code>todoName</code> juga akan ikut berubah.</p><p>Jika ingin mengecek jika nilai variabel berubah, kita bisa coba lihat dengan menambahkan elemen lain untuk testing di bawah input tadi.</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Nilai input: <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todoName"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div><p>Refresh browser kalian lalu coba masukan dan ubah nilai di input. Apakah seperti ini?</p><p><img alt="alpine1" src="https://salmnfrz.github.io/images/tutorial/todoList/alpine1.gif"/></p><p>Jika sudah benar, hapus lagi elemen <code>p</code> yang tadi untuk testing, ganti dengan button, maka komponen nya akan tampak seperti ini: </p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>           
     <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>button nya masih belum bisa melakukan perubahan terhadap data,agar button dapat melakukannya tambahkan atribut <code>x-on:click</code> yang  berisi program yang dijalankan setiap button di klik.</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>           
-    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">&quot;todos.push(todo);todoName=&#39;&#39;&quot;</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div><p>button nya masih belum bisa melakukan perubahan terhadap data,agar button dapat melakukannya tambahkan atribut <code>x-on:click</code> yang berisi program yang dijalankan setiap button di klik.</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>           
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">"todos.push(todo);todoName=''"</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p><code>todo.push</code> digunakan untuk menambahkan item ke array lalu kode disebelah titik koma digunakan untuk membersihkan input. Nah tampilannya masih kosong karena memang tidak ada elemen yang dibuat untuk menampilkan data. Untuk menampilkannya gunakan kita dapat menggunakan <code>x-for</code>.</p>
-<div class="highlight"><pre><span></span><code>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>           
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">&quot;todos.push(todoName);todoName=&#39;&#39;&quot;</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div><p><code>todo.push</code> digunakan untuk menambahkan item ke array lalu kode disebelah titik koma digunakan untuk membersihkan input. Nah tampilannya masih kosong karena memang tidak ada elemen yang dibuat untuk menampilkan data. Untuk menampilkannya gunakan kita dapat menggunakan <code>x-for</code>.</p><div class="highlight"><pre><span></span><code>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>           
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">"todos.push(todoName);todoName=''"</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">&quot;todo in todos&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">"todo in todos"</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
                 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Simpan lalu refresh lagi halaman html kalian. Maka tampilan akan menjadi seperti berikut: </p>
-<p><img alt="alpine1" src="https://salmnfrz.github.io/images/tutorial/todoList/alpine2.gif"></p>
-<p>Apakah sudah berhasil?</p>
-<p>Nah agar lebih rapih daripada menggunakan button saja, mari kita ubah komponennya menjadi didalam form.</p>
-<div class="highlight"><pre><span></span><code>    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">&quot;todos.push(todoName);todoName=&#39;&#39;&quot;</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">required</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>          
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div><p>Simpan lalu refresh lagi halaman html kalian. Maka tampilan akan menjadi seperti berikut: </p><p><img alt="alpine1" src="https://salmnfrz.github.io/images/tutorial/todoList/alpine2.gif"/></p><p>Apakah sudah berhasil?</p><p>Nah agar lebih rapih daripada menggunakan button saja, mari kita ubah komponennya menjadi didalam form.</p><div class="highlight"><pre><span></span><code>    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">"todos.push(todoName);todoName=''"</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">required</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>          
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">&quot;todo in todos&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">"todo in todos"</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-                    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
                 <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p><code>x-on:submit.prevent</code> adalah event yang akan menjalankan kode di dalam atribut jika melakukan submit, dan <code>prevent</code> dibelakangnya untuk mencegah terjadi refresh saat submit. Jika menggunakan form user dapat melakukan input dengan tombol enter dan dapat mencegah user memasukan data kosong dengan atribut <code>required</code> pada elemen input.</p>
-<h1>Membuatnya lebih kompleks</h1>
-<p>Nah,setelah memastikan todo list dapat menambahkan item, mari kita tambahkan fitur lainnya sehingga tampilanya lebih baik.</p>
-<p>Pertama tama ubah dulu data yang ditambahkan di <code>x-on:submit.prevent</code> menjadi object, sehingga kita dapat menyimpan lebih dari satu data pada sebuah elemen array.</p>
-<div class="highlight"><pre><span></span><code>...
-<span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">&quot;todos.push({id: todos.length,name: todoName, complete: false});todoName=&#39;&#39;&quot;</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
+</code></pre></div><p><code>x-on:submit.prevent</code> adalah event yang akan menjalankan kode di dalam atribut jika melakukan submit, dan <code>prevent</code> dibelakangnya untuk mencegah terjadi refresh saat submit. Jika menggunakan form user dapat melakukan input dengan tombol enter dan dapat mencegah user memasukan data kosong dengan atribut <code>required</code> pada elemen input.</p><h1>Membuatnya lebih kompleks</h1><p>Nah,setelah memastikan todo list dapat menambahkan item, mari kita tambahkan fitur lainnya sehingga tampilanya lebih baik.</p><p>Pertama tama ubah dulu data yang ditambahkan di <code>x-on:submit.prevent</code> menjadi object, sehingga kita dapat menyimpan lebih dari satu data pada sebuah elemen array.</p><div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">"todos.push({id: todos.length,name: todoName, complete: false});todoName=''"</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
 ...
-</code></pre></div>
-
-<p>Didalam object yang ditambahkan akan ada:</p>
-<ul>
-<li><code>id</code>: akan digunakan sebagai pembeda dari setiap item yang nilainya diambil dari jumlah item pada array</li>
-<li><code>name</code>: adalah nama dari item tersebut</li>
-<li><code>complete</code>: adalah nilai yang menentukan jika item sudah selesai atau belum.</li>
-</ul>
-<p>Kemudian elemen listnya diubah menjadi:</p>
-<div class="highlight"><pre><span></span><code>...
+</code></pre></div><p>Didalam object yang ditambahkan akan ada:</p><ul><li><code>id</code>: akan digunakan sebagai pembeda dari setiap item yang nilainya diambil dari jumlah item pada array</li><li><code>name</code>: adalah nama dari item tersebut</li><li><code>complete</code>: adalah nilai yang menentukan jika item sudah selesai atau belum.</li></ul><p>Kemudian elemen listnya diubah menjadi:</p><div class="highlight"><pre><span></span><code>...
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">&quot;todo in todos&quot;</span> <span class="na">:key</span><span class="o">=</span><span class="s">&quot;todo.id&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">"todo in todos"</span> <span class="na">:key</span><span class="o">=</span><span class="s">"todo.id"</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span><span class="p">&gt;</span>
-            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo.name&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo.name"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 ....
-</code></pre></div>
-
-<p>Karena sekarang bentuk item di dalam array adalah object, kita tidak bisa langsung mengakses nama dari item, dan harus menggunakan key dari object, seperti: <code>todo.name</code>,<code>todo.id</code>,<code>todo.complete</code>. Lalu untuk atribut <code>:key</code> digunakan untuk memastikan setiap item yang di loop memiliki nilai yang berbeda dari elemen lain sehingga memudahkan alpine js mendeteksi perubahan pada list.</p>
-<p>Jika mengikuti langkah diatas kode dari komponen yang kita buat akan tampak seperti ini: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">&quot;todos.push({id: todos.length,name: todoName,complete: false});todoName=&#39;&#39;&quot;</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">required</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>          
-    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</code></pre></div><p>Karena sekarang bentuk item di dalam array adalah object, kita tidak bisa langsung mengakses nama dari item, dan harus menggunakan key dari object, seperti: <code>todo.name</code>,<code>todo.id</code>,<code>todo.complete</code>. Lalu untuk atribut <code>:key</code> digunakan untuk memastikan setiap item yang di loop memiliki nilai yang berbeda dari elemen lain sehingga memudahkan alpine js mendeteksi perubahan pada list.</p><p>Jika mengikuti langkah diatas kode dari komponen yang kita buat akan tampak seperti ini: </p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">"todos.push({id: todos.length,name: todoName,complete: false});todoName=''"</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">required</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>          
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">&quot;todo in todos&quot;</span> <span class="na">:key</span><span class="o">=</span><span class="s">&quot;todo.id&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">"todo in todos"</span> <span class="na">:key</span><span class="o">=</span><span class="s">"todo.id"</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo.name&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo.name"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
                 <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Sekarang list item sudah memiliki checkbox dan button di sampingngnya, sekarang tambahkan fungsionalitas untuk keduanya.</p>
-<p>Yang pertama checkbox dahulu, jadi saat checknya dirubah(checked/uncheked) maka teks akan di coret. Untuk melakukannya kita menggunakan atribut <code>x-on:change</code> artinya program akan di dijalankan jika nilai elemen berubah.</p>
-<div class="highlight"><pre><span></span><code>...
-<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">x-on:change</span><span class="o">=</span><span class="s">&quot;todo.complete = !todo.complete&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo.name&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div><p>Sekarang list item sudah memiliki checkbox dan button di sampingngnya, sekarang tambahkan fungsionalitas untuk keduanya.</p><p>Yang pertama checkbox dahulu, jadi saat checknya dirubah(checked/uncheked) maka teks akan di coret. Untuk melakukannya kita menggunakan atribut <code>x-on:change</code> artinya program akan di dijalankan jika nilai elemen berubah.</p><div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span> <span class="na">x-on:change</span><span class="o">=</span><span class="s">"todo.complete = !todo.complete"</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo.name"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 ...
-</code></pre></div>
-
-<p>Nah, jika di klik maka nilai atribut complete pada object dari <code>todo</code> akan berubah sesuai kebalikannya(jika false jadi true, true jadi false).</p>
-<p>Karena sekarang atribut pada object <code>todo</code> sudah bisa berubah, sekarang kita tambahkan class css yang akan mencoret teks yang telah selesai. Pastinya buat css di dalam tag <code>style</code> di file yang sama.</p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="w"></span>
+</code></pre></div><p>Nah, jika di klik maka nilai atribut complete pada object dari <code>todo</code> akan berubah sesuai kebalikannya(jika false jadi true, true jadi false).</p><p>Karena sekarang atribut pada object <code>todo</code> sudah bisa berubah, sekarang kita tambahkan class css yang akan mencoret teks yang telah selesai. Pastinya buat css di dalam tag <code>style</code> di file yang sama.</p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="p">.</span><span class="nc">complete</span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">line-through</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Sekarang css untuk menandai item sudah ada, lalu bagaimana cara menambahkan class-nya ke item di list? Cara nya mudah, alpine js memilki atribut khusus untuk tugas ini, yaitu <code>x-bind:</code> atau <code>:&lt;nama atribut&gt;</code>(ganti <code>&lt;nama atribut&gt;</code> dengan nama atribut di html, misalnya: <code>:class</code>,<code>:style</code>,<code>:required</code> dsb). Atribut ini memilki fungsi untuk menjadikan atribut pada html menjadi dinamis.</p>
-<p>Sekarang kita tempatkan atribut <code>:class</code>(bentuk sederhana dari <code>x-bind:class</code>) pada teks untuk item nya(di <code>span</code>).</p>
-<div class="highlight"><pre><span></span><code>...
-<span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo.name&quot;</span> <span class="na">:class</span><span class="o">=</span><span class="s">&quot;todo.complete?&#39;complete&#39;:&#39;&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</code></pre></div><p>Sekarang css untuk menandai item sudah ada, lalu bagaimana cara menambahkan class-nya ke item di list? Cara nya mudah, alpine js memilki atribut khusus untuk tugas ini, yaitu <code>x-bind:</code> atau <code>:&lt;nama atribut&gt;</code>(ganti <code>&lt;nama atribut&gt;</code> dengan nama atribut di html, misalnya: <code>:class</code>,<code>:style</code>,<code>:required</code> dsb). Atribut ini memilki fungsi untuk menjadikan atribut pada html menjadi dinamis.</p><p>Sekarang kita tempatkan atribut <code>:class</code>(bentuk sederhana dari <code>x-bind:class</code>) pada teks untuk item nya(di <code>span</code>).</p><div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo.name"</span> <span class="na">:class</span><span class="o">=</span><span class="s">"todo.complete?'complete':''"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
 ...
-</code></pre></div>
-
-<p>Kita menggunakan operator ternary pada javascript untuk menentukan kapan class ditambahkan.</p>
-<p>Sekarang kita beralih ke fungsi untuk menghapus, caranya mudah, tinggal tambahkan <code>x-on:click</code> pada tombol hapus, lalu di dalamnya terdapat fungsi <code>filter</code> untuk menghapus salah satu item pada array. Bentuknya sebagai berikut: </p>
-<div class="highlight"><pre><span></span><code>...
-<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">&quot;</span>
+</code></pre></div><p>Kita menggunakan operator ternary pada javascript untuk menentukan kapan class ditambahkan.</p><p>Sekarang kita beralih ke fungsi untuk menghapus, caranya mudah, tinggal tambahkan <code>x-on:click</code> pada tombol hapus, lalu di dalamnya terdapat fungsi <code>filter</code> untuk menghapus salah satu item pada array. Bentuknya sebagai berikut: </p><div class="highlight"><pre><span></span><code>...
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">"</span>
 <span class="s">        todos = todos.filter(function(NewTodo){</span>
 <span class="s">            return NewTodo.id != todo.id</span>
 <span class="s">        })</span>
-<span class="s">&quot;</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="s">"</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 ...
-</code></pre></div>
-
-<p>Sekarang bentuk dari komponen todo list nya adalah: </p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="w"></span>
+</code></pre></div><p>Sekarang bentuk dari komponen todo list nya adalah: </p><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="w"></span>
 <span class="w">    </span><span class="p">.</span><span class="nc">complete</span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">line-through</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">&quot;todos.push({id: todos.length,name: todoName,complete: false});todoName=&#39;&#39;&quot;</span> <span class="na">x-data</span><span class="o">=</span><span class="s">&quot;{todos: [],todoName: &#39;&#39;}&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">x-model</span><span class="o">=</span><span class="s">&quot;todoName&quot;</span> <span class="na">required</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;masukan item&quot;</span><span class="p">&gt;</span>          
-    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">x-on:submit</span><span class="err">.</span><span class="na">prevent</span><span class="o">=</span><span class="s">"todos.push({id: todos.length,name: todoName,complete: false});todoName=''"</span> <span class="na">x-data</span><span class="o">=</span><span class="s">"{todos: [],todoName: ''}"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">x-model</span><span class="o">=</span><span class="s">"todoName"</span> <span class="na">required</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"masukan item"</span><span class="p">&gt;</span>          
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Tambah item<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">&quot;todo in todos&quot;</span> <span class="na">:key</span><span class="o">=</span><span class="s">&quot;todo.id&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="na">x-for</span><span class="o">=</span><span class="s">"todo in todos"</span> <span class="na">:key</span><span class="o">=</span><span class="s">"todo.id"</span><span class="p">&gt;</span>
             <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">x-on:change</span><span class="o">=</span><span class="s">&quot;todo.complete = !todo.complete&quot;</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">&quot;todo.name&quot;</span> <span class="na">:class</span><span class="o">=</span><span class="s">&quot;todo.complete?&#39;complete&#39;:&#39;&#39;&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-                <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">&quot;</span>
+                <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span> <span class="na">x-on:change</span><span class="o">=</span><span class="s">"todo.complete = !todo.complete"</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">span</span> <span class="na">x-text</span><span class="o">=</span><span class="s">"todo.name"</span> <span class="na">:class</span><span class="o">=</span><span class="s">"todo.complete?'complete':''"</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span> <span class="na">x-on:click</span><span class="o">=</span><span class="s">"</span>
 <span class="s">                        todos = todos.filter(function(NewTodo){</span>
 <span class="s">                        return NewTodo.id != todo.id</span>
 <span class="s">                    })</span>
-<span class="s">                &quot;</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="s">                "</span><span class="p">&gt;</span>Hapus<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
             <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
     <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</code></pre></div>
-
-<p>Simpan lalu refresh, jika semua sudah benar maka akan tampak seperti ini: </p>
-<p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="rNKqrwP" data-editable="true" data-user="alphabeta1906" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/alphabeta1906/pen/rNKqrwP">
-  Untitled</a> by AlphaBeta (<a href="https://codepen.io/alphabeta1906">@alphabeta1906</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-
-<p>Kalian juga bisa menambahkan css sehingga tampilan dapat menjadi bagus ataupun membuatnya lebih kompleks dari contoh diatas.</p>
-<p>Dan itulah tutorial membuat aplikasi todo list sederhana dengan alpine js.</p>
-    </article>
-
-        <div class="tags">
-            <p>tags: <a href="https://salmnfrz.github.io/tag/alpine-js.html">Alpine js</a>, <a href="https://salmnfrz.github.io/tag/javascript.html">Javascript</a></p>
-        </div>
-
-    <hr>
-
-        <div class="comments">
-            <h2>Comments !</h2>
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                var disqus_shortname = 'alphablog-2';
-                var disqus_identifier = 'tutorial-membuat-todo-list-dengan-alpine-js.html';
-                var disqus_url = 'https://salmnfrz.github.io/tutorial-membuat-todo-list-dengan-alpine-js.html';
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//alphablog-2.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            </script>
-            <noscript>Please enable JavaScript to view the comments.</noscript>
-        </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                            <li>
-                                <a href="https://github.com/alphabeta1906">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                    </ul>
-<p class="copyright text-muted">
-    Blog powered by <a href="http://getpelican.com">Pelican</a>,
-    which takes great advantage of <a href="http://python.org">Python</a>. <br />        &copy;  Alfarizi
-</p>                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- jQuery -->
-    <script data-turbolinks-eval=false src="https://salmnfrz.github.io/theme/js/jquery.min.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script data-turbolinks-eval=false src="https://salmnfrz.github.io/theme/js/bootstrap.min.js"></script>
-
-    <script data-turbolinks-eval=false src="https://salmnfrz.github.io/theme/js/alpine.js"></script>
-
-    
-
-        <!-- Custom Theme JavaScript -->
-        <script src="https://salmnfrz.github.io/theme/js/clean-blog.js"></script>
-
-<script type="text/javascript">
-    var disqus_shortname = 'alphablog-2';
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
-</body>
-
-</html>
+</code></pre></div><p>Simpan lalu refresh, jika semua sudah benar maka akan tampak seperti ini: </p><p class="codepen" data-default-tab="html,result" data-editable="true" data-height="300" data-slug-hash="rNKqrwP" data-user="alphabeta1906" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"><span>See the Pen <a href="https://codepen.io/alphabeta1906/pen/rNKqrwP"> Untitled</a> by AlphaBeta (<a href="https://codepen.io/alphabeta1906">@alphabeta1906</a>) on <a href="https://codepen.io">CodePen</a>.</span></p><script async="" src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script><p>Kalian juga bisa menambahkan css sehingga tampilan dapat menjadi bagus ataupun membuatnya lebih kompleks dari contoh diatas.</p><p>Dan itulah tutorial membuat aplikasi todo list sederhana dengan alpine js.</p></article><div class="tags"><p>tags: <a href="https://salmnfrz.github.io/tag/alpine-js.html">Alpine js</a>, <a href="https://salmnfrz.github.io/tag/javascript.html">Javascript</a></p></div><hr/><div class="comments"><h2>Comments !</h2><div id="disqus_thread"></div><script type="text/javascript">var disqus_shortname='alphablog-2';var disqus_identifier='tutorial-membuat-todo-list-dengan-alpine-js.html';var disqus_url='https://salmnfrz.github.io/tutorial-membuat-todo-list-dengan-alpine-js.html';(function(){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='//alphablog-2.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the comments.</noscript></div></div></div></div><footer><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href="https://github.com/alphabeta1906"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fab fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted"> Blog powered by <a href="http://getpelican.com">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>. <br/> © Alfarizi </p> </div></div></div></footer><script data-turbolinks-eval="false" src="https://salmnfrz.github.io/theme/js/jquery.min.js"></script><script data-turbolinks-eval="false" src="https://salmnfrz.github.io/theme/js/bootstrap.min.js"></script><script data-turbolinks-eval="false" src="https://salmnfrz.github.io/theme/js/alpine.js"></script><script src="https://salmnfrz.github.io/theme/js/clean-blog.js"></script><script type="text/javascript">var disqus_shortname='alphablog-2';(function(){var s=document.createElement('script');s.async=true;s.type='text/javascript';s.src='//'+disqus_shortname+'.disqus.com/count.js';(document.getElementsByTagName('HEAD')[0]||document.getElementsByTagName('BODY')[0]).appendChild(s);}());</script></body></html>

@@ -88,17 +88,20 @@ hr.small {
 }
 .navbar-custom .nav li a {
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 800;
   letter-spacing: 1px;
 }
+
 @media only screen and (min-width: 768px) {
   .navbar-custom {
     border-bottom: 1px solid transparent;
   }
-  .dark .navbar-custom .navbar-brand {
-    color: #4f4f50;
+  .navbar-custom .navbar-brand{
     padding: 20px;
+  }
+  .dark .navbar-custom .navbar-brand {
+    color: #4f4f50;    
   }
   .dark .navbar-custom .navbar-brand:hover,
   .dark .navbar-custom .navbar-brand:focus {
@@ -137,7 +140,7 @@ hr.small {
     /* when the user scrolls down, we hide the header right above the viewport */
     position: fixed;
     top: -61px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 1);
     border-bottom: 1px solid #f2f2f2;
     -webkit-transition: -webkit-transform 0.3s;
     -moz-transition: -moz-transform 0.3s;
